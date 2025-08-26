@@ -81,13 +81,13 @@ export class CartComponent {
   // =================== CART ===================
   increaseQty(item: CartItem) {
     item.quantity++;
-    this.saveCart();
+    // this.saveCart();
   }
 
   decreaseQty(item: CartItem) {
     if (item.quantity > 1) {
       item.quantity--;
-      this.saveCart();
+      // this.saveCart();
     }
   }
 
@@ -153,19 +153,19 @@ export class CartComponent {
         this.cartItems = parsed;
       } else {
         // fallback to defaults
-        // this.cartItems = [
-        //   { name: 'Agarbatti', price: 50, quantity: 2 },
-        //   { name: 'Diya', price: 30, quantity: 5 },
-        //   { name: 'Kumkum', price: 20, quantity: 1 },
-        // ];
+        this.cartItems = [
+          { name: 'Agarbatti', price: 50, quantity: 2 },
+          { name: 'Diya', price: 30, quantity: 5 },
+          { name: 'Kumkum', price: 20, quantity: 1 },
+        ];
       }
     } else {
       // no cart in localStorage → load defaults
-      // this.cartItems = [
-      //   { name: 'Agarbatti', price: 50, quantity: 2 },
-      //   { name: 'Diya', price: 30, quantity: 5 },
-      //   { name: 'Kumkum', price: 20, quantity: 1 },
-      // ];
+      this.cartItems = [
+        { name: 'Agarbatti', price: 50, quantity: 2 },
+        { name: 'Diya', price: 30, quantity: 5 },
+        { name: 'Kumkum', price: 20, quantity: 1 },
+      ];
     }
   }
 
