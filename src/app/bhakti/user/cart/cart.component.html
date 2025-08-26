@@ -1,0 +1,121 @@
+<div class="cart-container">
+  <h2>🛒 Your Cart</h2>
+
+  <!-- Cart Items -->
+  <table *ngIf="cartItems.length > 0; else emptyCart">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Price (₹)</th>
+        <th>Quantity</th>
+        <th>Subtotal (₹)</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cartItems; let i = index">
+        <td>{{ item.name }}</td>
+        <td>{{ item.price }}</td>
+        <td>
+          <button (click)="decreaseQty(item)">-</button>
+          {{ item.quantity }}
+          <button (click)="increaseQty(item)">+</button>
+        </td>
+        <td>{{ item.price * item.quantity }}</td>
+        <td>
+          <button class="remove" (click)="removeItem(i)">❌</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Empty Cart Message -->
+  <ng-template #emptyCart>
+    <p class="empty">🛍️ Your cart is empty.</p>
+  </ng-template>
+
+  <!-- Totals -->
+  <div class="totals" *ngIf="cartItems.length > 0">
+    <p>Subtotal: ₹{{ getSubtotal() }}</p>
+    <p>
+      <b>Total: ₹{{ getTotal() }}</b>
+    </p>
+  </div>
+
+  <!-- Saved Addresses -->
+  <div class="address-section" *ngIf="cartItems.length > 0">
+    <h3>📍 Choose Delivery Address</h3>
+    <div *ngFor="let addr of addresses">
+      <input
+        type="radio"
+        name="addressOption"
+        [value]="addr.id"
+        [(ngModel)]="selectedAddressId"
+        (change)="useNewAddress = false"
+      />
+      <b>{{ addr.name }}</b> ({{ addr.phone }}) <br />
+      {{ addr.street }}, {{ addr.city }} - {{ addr.pincode }}
+      <span *ngIf="addr.landmark">, {{ addr.landmark }}</span>
+
+      <div class="address-actions">
+        <button (click)="editAddress(addr)">✏️ Edit</button>
+        <button (click)="deleteAddress(addr.id)" class="delete">
+          🗑️ Delete
+        </button>
+      </div>
+      <hr />
+    </div>
+  </div>
+
+  <!-- Manual Address Form -->
+  <div class="address-form" *ngIf="cartItems.length > 0">
+    <h3>
+      {{ editAddressId ? "✏️ Edit Delivery Address" : "➕ Add New Address" }}
+    </h3>
+    <form #addressForm="ngForm">
+      <label>Full Name *</label>
+      <input type="text" name="name" [(ngModel)]="address.name" required />
+
+      <label>Phone Number *</label>
+      <input type="text" name="phone" [(ngModel)]="address.phone" required />
+
+      <label>Street Address *</label>
+      <input type="text" name="street" [(ngModel)]="address.street" required />
+
+      <label>City *</label>
+      <input type="text" name="city" [(ngModel)]="address.city" required />
+
+      <label>Pincode *</label>
+      <input
+        type="text"
+        name="pincode"
+        [(ngModel)]="address.pincode"
+        required
+      />
+
+      <label>Landmark (optional)</label>
+      <input type="text" name="landmark" [(ngModel)]="address.landmark" />
+    </form>
+
+    <!-- Cancel Edit button (only in edit mode) -->
+    <button *ngIf="editAddressId" (click)="cancelEdit()" class="cancel">
+      ❌ Cancel Edit
+    </button>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-buttons" *ngIf="cartItems.length > 0">
+    <button (click)="saveAddress()">💾 Save Address</button>
+    <button (click)="saveCart()">🛒 Save Cart</button>
+    <button (click)="clearCart()" class="clear">🗑️ Clear Cart</button>
+  </div>
+
+  <!-- Continue to Payment -->
+  <button
+    class="place-order"
+    [disabled]="!isAddressValid() || cartItems.length === 0"
+    (click)="continueToPayment()"
+  >
+    💳 Continue to Payment
+  </button>
+</div>

@@ -1,0 +1,11 @@
+<div class="packages-page">
+  <h2>📦 All Puja Packages</h2>
+
+  <div class="package-cards">
+    <div class="package-card" *ngFor="let pkg of packages">
+      <h3>{{ pkg.name }}</h3>
+      <p>{{ pkg.description }}</p>
+      <button (click)="viewPackage(pkg.id)">View Package</button>
+    </div>
+  </div>
+</div>

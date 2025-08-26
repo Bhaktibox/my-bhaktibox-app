@@ -1,0 +1,29 @@
+<div class="category-page">
+  <h2>{{ categoryName }}</h2>
+
+  <!-- 🔍 Search Bar -->
+  <input
+    type="text"
+    placeholder="Search items..."
+    [(ngModel)]="searchTerm"
+    class="search-bar"
+  />
+
+  <!-- 🛕 Product Grid -->
+  <div class="products">
+    <div class="product-card" *ngFor="let item of filteredItems()">
+      <img [src]="item.image" alt="{{ item.name }}" />
+      <h3>{{ item.name }}</h3>
+      <p>₹{{ item.price }}</p>
+
+      <!-- Quantity Selector -->
+      <div class="quantity">
+        <button (click)="decreaseQuantity(item)">-</button>
+        <span>{{ item.quantity }}</span>
+        <button (click)="increaseQuantity(item)">+</button>
+      </div>
+
+      <button class="add-to-cart" (click)="addToCart(item)">Add to Cart</button>
+    </div>
+  </div>
+</div>

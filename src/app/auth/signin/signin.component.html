@@ -1,0 +1,75 @@
+<div class="signin-container" [@fadeInAnimation]="animationState">
+  <div class="icon-banner" routerLink="/">
+    <!-- <div class="icon" [innerHTML]="getIconContent(mainlogo)"></div> -->
+    <img src="assets/images/logo.jpg" alt="BhaktiBox Logo" class="logo-img" />
+    <h1>BhaktiBox</h1>
+  </div>
+
+  <h2>Sign into your account</h2>
+  <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+    <input
+      type="text"
+      placeholder="username"
+      id="username"
+      formControlName="username"
+    />
+    <div
+      class="invalid"
+      *ngIf="username!.invalid && (username!.dirty || username!.touched)"
+    >
+      <div *ngIf="username!.errors!['required']">Username is required.</div>
+    </div>
+
+    <div class="passwordCheck">
+      <input
+        placeholder="password"
+        type="{{ showPassword ? 'text' : 'password' }}"
+        id="password"
+        formControlName="password"
+      />
+      <i
+        class="material-icons password-icon"
+        (click)="togglePasswordVisibility()"
+      >
+        {{ showPassword ? "visibility" : "visibility_off" }}
+      </i>
+    </div>
+
+    <div
+      class="invalid"
+      *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+    >
+      <div *ngIf="password?.errors?.['required']">Password is required.</div>
+      <div *ngIf="(password?.errors)?.['minlength']">
+        Password must be at least 6 characters.
+      </div>
+    </div>
+
+    <!-- <select formControlName="selectedRole">
+      <option value="" disabled>Select a Profile</option>
+      <option value="bidder">Bidder</option>
+      <option value="auctionner">Auctionner</option>
+    </select>
+
+    <div
+      class="invalid"
+      *ngIf="
+        signinForm.get('selectedRole')?.hasError('required') &&
+        signinForm.get('selectedRole')?.touched
+      "
+    >
+      Please select a profile.
+    </div>-->
+    <button class="mt-2" type="submit" [disabled]="signinForm.invalid">
+      Sign In
+    </button>
+    <div class="forgot-password-link">
+      <a routerLink="/forgot-password" (click)="forgotPassword()"
+        >Forgot Password?</a
+      >
+      <p>
+        Don't have an account? <span routerLink="/signup">Register here.</span>
+      </p>
+    </div>
+  </form>
+</div>

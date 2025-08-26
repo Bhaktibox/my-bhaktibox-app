@@ -1,0 +1,97 @@
+<app-back-to-dashboard></app-back-to-dashboard>
+<div class="orders-management">
+  <h2>📦 Orders Management</h2>
+
+  <table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Customer</th>
+        <th>Products</th>
+        <th>Status</th>
+        <th>City</th>
+        <th>Pincode</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Normal Rows -->
+      <ng-container *ngFor="let order of orders">
+        <tr *ngIf="editingOrder?.id !== order.id">
+          <td>{{ order.id }}</td>
+          <td>{{ order.customerName }}</td>
+
+          <!-- Product handling -->
+          <td>
+            <ng-container *ngIf="order.packageName">
+              🎁 Package: {{ order.packageName }}
+            </ng-container>
+            <ng-container *ngIf="order.items">
+              <ul>
+                <li *ngFor="let item of order.items">
+                  {{ item.name }} (x{{ item.qty }})
+                </li>
+              </ul>
+            </ng-container>
+          </td>
+
+          <td>{{ order.status }}</td>
+          <td>{{ order.city }}</td>
+          <td>{{ order.pincode }}</td>
+          <td>
+            <button (click)="editOrder(order)">✏️ Edit</button>
+            <button (click)="deleteOrder(order.id)">🗑️ Delete</button>
+          </td>
+        </tr>
+      </ng-container>
+
+      <!-- Editing Row -->
+      <tr *ngIf="editingOrder">
+        <td>{{ editingOrder.id }}</td>
+        <td><input [(ngModel)]="editingOrder.customerName" /></td>
+
+        <td>
+          <!-- Package dropdown -->
+          <div *ngIf="!editingOrder.items">
+            <select [(ngModel)]="editingOrder.packageName">
+              <option *ngFor="let pkg of packages" [value]="pkg">
+                {{ pkg }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Items input -->
+          <div *ngIf="editingOrder.items">
+            <div *ngFor="let item of editingOrder.items; let i = index">
+              <input [(ngModel)]="item.name" placeholder="Item name" />
+              <input
+                type="number"
+                [(ngModel)]="item.qty"
+                placeholder="Qty"
+                min="1"
+              />
+            </div>
+            <button (click)="editingOrder.items.push({ name: '', qty: 1 })">
+              ➕ Add Item
+            </button>
+          </div>
+        </td>
+
+        <td>
+          <select [(ngModel)]="editingOrder.status">
+            <option>Pending</option>
+            <option>Shipped</option>
+            <option>Delivered</option>
+            <option>Cancelled</option>
+          </select>
+        </td>
+        <td><input [(ngModel)]="editingOrder.city" /></td>
+        <td><input [(ngModel)]="editingOrder.pincode" /></td>
+        <td>
+          <button (click)="saveOrder()">💾 Save</button>
+          <button (click)="cancelEdit()">❌ Cancel</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

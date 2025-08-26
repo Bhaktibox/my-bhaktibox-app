@@ -1,0 +1,40 @@
+<app-back-to-dashboard></app-back-to-dashboard>
+<div class="assign-deliveries">
+  <h2>📦 Assign Deliveries (Based on Pincode & City)</h2>
+
+  <!-- Select Order -->
+  <div class="form-group">
+    <label>Select Order:</label>
+    <select [(ngModel)]="selectedOrderId" (change)="onOrderChange()">
+      <option [ngValue]="null">-- Select Order --</option>
+      <option *ngFor="let order of orders" [ngValue]="order.id">
+        Order #{{ order.id }} - {{ order.customerName }} |
+        {{ order.product }} ({{ order.city }}, {{ order.pincode }})
+      </option>
+    </select>
+  </div>
+
+  <!-- Shopkeepers filtered by pincode -->
+  <div class="form-group" *ngIf="filteredShopkeepers.length > 0">
+    <label>Select Shopkeeper:</label>
+    <select [(ngModel)]="selectedShopkeeperId">
+      <option [ngValue]="null">-- Select Shopkeeper --</option>
+      <option *ngFor="let shop of filteredShopkeepers" [ngValue]="shop.id">
+        {{ shop.name }} ({{ shop.city }}, {{ shop.pincode }})
+      </option>
+    </select>
+  </div>
+
+  <!-- Delivery Agents filtered by pincode -->
+  <div class="form-group" *ngIf="filteredAgents.length > 0">
+    <label>Select Delivery Agent:</label>
+    <select [(ngModel)]="selectedAgentId">
+      <option [ngValue]="null">-- Select Agent --</option>
+      <option *ngFor="let agent of filteredAgents" [ngValue]="agent.id">
+        {{ agent.name }} ({{ agent.city }}, {{ agent.pincode }})
+      </option>
+    </select>
+  </div>
+
+  <button (click)="assignDelivery()">🚀 Assign Delivery</button>
+</div>

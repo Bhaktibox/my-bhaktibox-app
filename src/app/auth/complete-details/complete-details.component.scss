@@ -1,0 +1,173 @@
+.whole-container{
+ padding: 0 15px;
+ margin: 50px; 
+
+}
+
+form{
+    max-width: 700px;
+    min-width:300px ;
+    margin: auto;
+    width: 60%;
+    background: linear-gradient(to top, rgba(255, 250, 240, 0.8) 0%, #e2e9ee 100%);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3);
+}
+
+.details-container{
+    width: 100%;
+}
+
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: 2px solid #000;
+  }
+
+  button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+  }
+
+  span {
+    flex: 1;
+    text-align: center;
+  }
+
+  /* user-privacy-slider.component.css */
+.privacy-slider {
+    width: 65px;
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 10px; /* Half of the height to make it square */
+    position: relative;
+    cursor: pointer;
+  }
+
+  .privacy-slider.addressPrivate , .privacy-slider.upiPrivate , .privacy-slider.emailPrivate , .privacy-slider.phonePrivate , .privacy-slider.namePrivate {
+    background-color: #ff6347; /* Change color for private setting */
+  }
+
+  .slider-handle {
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 1px; /* Center the handle vertically */
+    left: 1px; /* Start slightly left to give a border effect */
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+  }
+
+  .privacy-slider.namePrivate .slider-handle {
+    transform: translateX(40px); /* Move handle to the right for private setting */
+  }
+  .privacy-slider.phonePrivate .slider-handle {
+    transform: translateX(40px); /* Move handle to the right for private setting */
+  }
+  .privacy-slider.emailPrivate .slider-handle {
+    transform: translateX(40px); /* Move handle to the right for private setting */
+  }
+  .privacy-slider.upiPrivate .slider-handle {
+    transform: translateX(40px); /* Move handle to the right for private setting */
+  }
+  .privacy-slider.addressPrivate .slider-handle {
+    transform: translateX(40px); /* Move handle to the right for private setting */
+  }
+
+
+  #username-privacy , #phone-privacy , #address-privacy , #upiId-privacy , #email-privacy{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    align-items: center;
+  }
+
+
+
+  
+.toggle-switch {
+  display: inline-block;
+  background: red;
+  border-radius: 16px;
+  width: 60px;
+  height: 24px;
+  position: relative;
+  vertical-align: middle;
+  transition: 0.25s;
+  font-size: 12px;
+}
+
+.toggle-switch:before,
+.toggle-switch:after {
+  content: "";
+}
+
+.toggle-switch:before {
+  display: block;
+  background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: left 0.25s;
+}
+
+.toggle:hover .toggle-switch:before {
+  background: linear-gradient(to bottom, #fff 0%, #fff 100%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.toggle-checkbox:checked + .toggle-switch {
+  background: #56c080;
+}
+
+.toggle-checkbox:checked + .toggle-switch:before {
+  left: 40px;
+}
+
+.toggle-checkbox {
+  position: absolute;
+  visibility: hidden;
+}
+
+.toggle-label {
+  margin-left: 5px;
+  position: relative;
+  font-size: 14px;
+  top: 2px;
+}

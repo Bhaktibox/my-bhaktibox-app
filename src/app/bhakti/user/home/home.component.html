@@ -1,0 +1,101 @@
+<div class="home-container">
+  <!-- 🔹 Banner Carousel -->
+  <div class="banner">
+    <div
+      class="carousel"
+      [style.transform]="'translateX(-' + currentIndex * 100 + '%)'"
+    >
+      <div class="slide" *ngFor="let banner of banners">
+        <img [src]="banner" alt="Puja Banner" />
+      </div>
+    </div>
+
+    <!-- Navigation buttons -->
+    <button class="prev" (click)="prevSlide()">&#10094;</button>
+    <button class="next" (click)="nextSlide()">&#10095;</button>
+
+    <!-- Dots -->
+    <div class="dots">
+      <span
+        *ngFor="let banner of banners; let i = index"
+        [class.active]="i === currentIndex"
+        (click)="goToSlide(i)"
+      ></span>
+    </div>
+  </div>
+
+  <!-- 🔹 Upload Your Puja Items List -->
+  <div class="upload-section card" id="service">
+    <h2>📤 Upload Your Puja Items List</h2>
+    <p>
+      If you already have your puja list, upload it here and we’ll deliver
+      everything at your doorstep.
+    </p>
+    <input type="file" (change)="onFileSelected($event)" />
+    <button (click)="uploadFile()">Upload List</button>
+  </div>
+
+  <!-- 🔹 Puja Packages -->
+  <div class="packages card">
+    <h2>📦 Puja Packages</h2>
+    <div class="package-cards">
+      <div class="package-card" *ngFor="let pkg of packages | slice : 0 : 3">
+        <h3>{{ pkg.name }}</h3>
+        <p>{{ pkg.description }}</p>
+        <button [routerLink]="['/packages', pkg.id]">View Package</button>
+      </div>
+    </div>
+
+    <!-- ✅ View More Button -->
+    <div class="view-more">
+      <button routerLink="/packages">View More Packages</button>
+    </div>
+  </div>
+
+  <!-- 🔹 Categories Section -->
+  <div class="categories card">
+    <h2>🛕 Browse by Categories</h2>
+    <div class="category-grid">
+      <div class="category-card" *ngFor="let section of categorySections">
+        <h3>{{ section.title }}</h3>
+        <div class="items">
+          <div class="item" *ngFor="let item of section.items">
+            <img [src]="item.image" [alt]="item.name" />
+            <span>{{ item.name }}</span>
+          </div>
+        </div>
+        <a
+          class="see-more"
+          routerLink="/category/{{ section.title | lowercase }}"
+          [routerLink]="['/category', section.id]"
+          >See more →</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔹 About Us Section -->
+  <div class="about-us" id="about">
+    <div class="about-content">
+      <h2>About Us</h2>
+      <p>
+        At <strong>Bhakti Box</strong>, we are a passionate team dedicated to
+        bringing spirituality closer to your home. Our mission is to simplify
+        the way you access <em>puja items</em>, ensuring authenticity, quality,
+        and doorstep delivery.
+      </p>
+      <p>
+        From traditional ceremonies like <b>Satyanarayan Puja</b> to rituals of
+        remembrance, we carefully curate items and packages that make your
+        spiritual journey peaceful and hassle-free.
+      </p>
+      <p>
+        With love, devotion, and teamwork, we strive to keep the essence of
+        faith alive in every household. 🙏
+      </p>
+    </div>
+    <div class="about-image">
+      <img src="assets/images/about.png" alt="Our Team" loading="lazy" />
+    </div>
+  </div>
+</div>

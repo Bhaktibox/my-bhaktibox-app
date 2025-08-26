@@ -1,0 +1,26 @@
+<div class="saved-cart-container">
+  <h2>🛒 Saved Carts</h2>
+
+  <button class="save-btn" (click)="saveCart()">💾 Save Current Cart</button>
+
+  <div *ngIf="savedCarts.length === 0" class="empty-msg">
+    No saved carts yet.
+  </div>
+
+  <div *ngFor="let savedCart of savedCarts" class="saved-cart">
+    <h3>Saved on: {{ savedCart.savedAt }}</h3>
+    <ul>
+      <li *ngFor="let item of savedCart.items">
+        {{ item.name }} - ₹{{ item.price }} × {{ item.quantity }}
+      </li>
+    </ul>
+    <div class="cart-actions">
+      <button class="restore-btn" (click)="restoreCart(savedCart)">
+        🔄 Restore
+      </button>
+      <button class="delete-btn" (click)="deleteCart(savedCart.id)">
+        🗑️ Delete
+      </button>
+    </div>
+  </div>
+</div>

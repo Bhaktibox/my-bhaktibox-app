@@ -1,0 +1,150 @@
+/* ===== Page Layout ===== */
+.orders-page {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.orders-page h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #4a148c;
+}
+
+/* ===== Order Card ===== */
+.order-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-3px);
+}
+
+.order-card h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  color: #2c3e50;
+}
+
+.order-card p {
+  margin: 5px 0;
+  font-size: 15px;
+}
+
+/* ===== Buttons ===== */
+.order-actions {
+  margin-top: 15px;
+}
+
+.btn {
+  padding: 8px 16px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease, transform 0.1s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* Cancel */
+.btn.cancel {
+  background: #ff4d4f;
+  color: #fff;
+}
+.btn.cancel:hover {
+  background: #e53935;
+}
+
+/* Return */
+.btn.return {
+  background: #ff9800;
+  color: #fff;
+}
+.btn.return:hover {
+  background: #fb8c00;
+}
+
+/* Replace */
+.btn.replace {
+  background: #2196f3;
+  color: #fff;
+}
+.btn.replace:hover {
+  background: #1976d2;
+}
+
+/* Confirm Button */
+.btn.confirm {
+  background: #4caf50;
+  color: #fff;
+}
+.btn.confirm:hover {
+  background: #43a047;
+}
+
+/* ===== Modal Styling ===== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 380px;
+  max-width: 95%;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  color: #4a148c;
+}
+
+.modal-content label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+.modal-content select,
+.modal-content input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.modal-buttons {
+  text-align: right;
+  margin-top: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}

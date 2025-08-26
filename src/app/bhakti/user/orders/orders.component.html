@@ -1,0 +1,102 @@
+<div class="orders-page">
+  <h2>My Orders</h2>
+
+  <div *ngFor="let order of orders" class="order-card">
+    <h3>Order #{{ order.id }}</h3>
+    <p><strong>Item:</strong> {{ order.item }}</p>
+    <p><strong>Amount:</strong> ₹{{ order.amount }}</p>
+    <p><strong>Status:</strong> {{ order.status }}</p>
+
+    <!-- Delivery Person (only if required) -->
+    <p
+      *ngIf="order.status === 'Shipped' || order.status === 'Out for Delivery'"
+    >
+      <strong>Delivery Person:</strong> {{ order.deliveryPerson }}
+    </p>
+
+    <!-- Actions -->
+    <div class="order-actions">
+      <!-- Cancel (only Pending or Shipped) -->
+      <button
+        *ngIf="order.status === 'Pending' || order.status === 'Shipped'"
+        class="btn cancel"
+        (click)="openCancelModal(order)"
+      >
+        Cancel Order
+      </button>
+
+      <!-- Return (only Delivered) -->
+      <button
+        *ngIf="order.status === 'Delivered'"
+        class="btn return"
+        (click)="openReturnModal(order)"
+      >
+        Return
+      </button>
+
+      <!-- Replace (only Delivered) -->
+      <button
+        *ngIf="order.status === 'Delivered'"
+        class="btn replace"
+        (click)="openReplaceModal(order)"
+      >
+        Replace
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= Cancel Modal ================= -->
+<div class="modal" *ngIf="showCancelModal">
+  <div class="modal-content">
+    <h3>Cancel Order #{{ selectedOrder?.id }}?</h3>
+    <p>Once cancelled, this cannot be undone.</p>
+    <div class="modal-buttons">
+      <button class="btn confirm" (click)="confirmCancel()">Yes, Cancel</button>
+      <button class="btn cancel" (click)="closeCancelModal()">No, Keep</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= Return Modal ================= -->
+<div class="modal" *ngIf="showReturnModal">
+  <div class="modal-content">
+    <h3>Return Order #{{ selectedOrder?.id }}</h3>
+    <label>Reason:</label>
+    <select [(ngModel)]="returnReason">
+      <option value="Damaged item">Damaged item</option>
+      <option value="Wrong item">Wrong item</option>
+      <option value="Quality issue">Quality issue</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label>Upload Photo (optional):</label>
+    <input type="file" (change)="onFileUpload($event)" />
+
+    <div class="modal-buttons">
+      <button class="btn confirm" (click)="confirmReturn()">Submit</button>
+      <button class="btn cancel" (click)="closeReturnModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= Replace Modal ================= -->
+<div class="modal" *ngIf="showReplaceModal">
+  <div class="modal-content">
+    <h3>Replace Order #{{ selectedOrder?.id }}</h3>
+    <label>Reason:</label>
+    <select [(ngModel)]="replaceReason">
+      <option value="Damaged item">Damaged item</option>
+      <option value="Wrong item">Wrong item</option>
+      <option value="Quality issue">Quality issue</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <p>We will send a replacement for this product once confirmed.</p>
+
+    <div class="modal-buttons">
+      <button class="btn confirm" (click)="confirmReplace()">Submit</button>
+      <button class="btn cancel" (click)="closeReplaceModal()">Cancel</button>
+    </div>
+  </div>
+</div>

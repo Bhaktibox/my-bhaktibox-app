@@ -1,0 +1,84 @@
+<div class="profile-container">
+  <h2>👤 My Profile</h2>
+
+  <!-- Profile Picture -->
+  <div class="profile-pic">
+    <img
+      [src]="profile.profilePic || 'assets/default-avatar.png'"
+      alt="Profile Picture"
+    />
+  </div>
+
+  <!-- View Mode -->
+  <div *ngIf="!isEditing" class="profile-view">
+    <p><strong>Name:</strong> {{ profile.name }}</p>
+    <p><strong>Email:</strong> {{ profile.email }}</p>
+    <p><strong>Phone:</strong> {{ profile.phone }}</p>
+    <p><strong>Gender:</strong> {{ profile.gender }}</p>
+    <p><strong>Date of Birth:</strong> {{ profile.dob }}</p>
+    <p><strong>Address:</strong> {{ profile.address }}</p>
+
+    <div class="buttons">
+      <button (click)="editProfile()">✏️ Edit Profile</button>
+      <button class="danger" (click)="deactivateAccount()">
+        🚫 Deactivate Account
+      </button>
+    </div>
+  </div>
+
+  <!-- Edit Mode -->
+  <form *ngIf="isEditing" class="profile-edit" (ngSubmit)="saveProfile()">
+    <label>
+      Profile Picture:
+      <input
+        type="file"
+        accept="image/*"
+        (change)="onProfilePicSelected($event)"
+      />
+    </label>
+
+    <label>
+      Name:
+      <input type="text" [(ngModel)]="profile.name" name="name" required />
+    </label>
+
+    <label>
+      Email:
+      <input type="email" [(ngModel)]="profile.email" name="email" required />
+    </label>
+
+    <label>
+      Phone:
+      <input type="tel" [(ngModel)]="profile.phone" name="phone" required />
+    </label>
+
+    <label>
+      Gender:
+      <select [(ngModel)]="profile.gender" name="gender" required>
+        <option value="">-- Select --</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+    </label>
+
+    <label>
+      Date of Birth:
+      <input type="date" [(ngModel)]="profile.dob" name="dob" />
+    </label>
+
+    <label>
+      Address:
+      <textarea
+        [(ngModel)]="profile.address"
+        name="address"
+        required
+      ></textarea>
+    </label>
+
+    <div class="buttons">
+      <button type="submit">💾 Save</button>
+      <button type="button" (click)="cancelEdit()">❌ Cancel</button>
+    </div>
+  </form>
+</div>

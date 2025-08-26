@@ -1,0 +1,61 @@
+.returns-management {
+  padding: 20px;
+}
+
+h2 {
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+th {
+  background: #f4f4f4;
+  text-align: left;
+}
+
+td, th {
+  padding: 10px;
+}
+
+button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:first-child {
+  background: #27ae60;
+  color: white;
+}
+
+button:last-child {
+  background: #e74c3c;
+  color: white;
+}
+
+span.pending {
+  color: #f39c12;
+  font-weight: bold;
+}
+
+span.approved {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+span.rejected {
+  color: #e74c3c;
+  font-weight: bold;
+}

@@ -1,0 +1,44 @@
+<app-back-to-dashboard></app-back-to-dashboard>
+<div class="returns-management">
+  <h2>🔄 Returns & Replacements</h2>
+  <p>Approve / Reject customer return or replacement requests</p>
+
+  <table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Order ID</th>
+        <th>Customer</th>
+        <th>Product</th>
+        <th>Type</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let req of requests">
+        <td>{{ req.id }}</td>
+        <td>{{ req.orderId }}</td>
+        <td>{{ req.customerName }}</td>
+        <td>{{ req.product }}</td>
+        <td>{{ req.type }}</td>
+        <td>{{ req.reason }}</td>
+        <td>
+          <span [ngClass]="req.status.toLowerCase()">{{ req.status }}</span>
+        </td>
+        <td>
+          <button
+            *ngIf="req.status === 'Pending'"
+            (click)="approveRequest(req)"
+          >
+            ✅ Approve
+          </button>
+          <button *ngIf="req.status === 'Pending'" (click)="rejectRequest(req)">
+            ❌ Reject
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

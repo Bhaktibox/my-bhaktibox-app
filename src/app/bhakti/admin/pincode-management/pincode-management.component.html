@@ -1,0 +1,55 @@
+<app-back-to-dashboard></app-back-to-dashboard>
+<div class="pincode-container">
+  <h2>📍 Pincode Management</h2>
+
+  <!-- Add new pincode -->
+  <div class="form-inline">
+    <input
+      type="text"
+      [(ngModel)]="newPincode"
+      placeholder="Enter new Pincode"
+    />
+    <button (click)="addPincode()">Add Pincode</button>
+  </div>
+
+  <div class="pincode-list">
+    <h3>All Pincodes</h3>
+    <ul>
+      <li *ngFor="let p of pincodes" (click)="selectPincode(p)">
+        {{ p.code }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- Selected Pincode Details -->
+  <div *ngIf="selectedPincode" class="details">
+    <h3>Details for Pincode: {{ selectedPincode.code }}</h3>
+
+    <!-- Shops -->
+    <div>
+      <h4>Shops</h4>
+      <input type="text" [(ngModel)]="newShop" placeholder="Shop Name" />
+      <button (click)="addShop()">Add Shop</button>
+      <ul>
+        <li *ngFor="let shop of selectedPincode.shops">{{ shop }}</li>
+      </ul>
+    </div>
+
+    <!-- Delivery Agents -->
+    <div>
+      <h4>Delivery Agents</h4>
+      <input type="text" [(ngModel)]="newAgentName" placeholder="Agent Name" />
+      <input
+        type="text"
+        [(ngModel)]="newAgentPhone"
+        placeholder="Agent Phone"
+      />
+      <button (click)="addAgent()">Add Agent</button>
+      <ul>
+        <li *ngFor="let agent of selectedPincode.agents">
+          {{ agent.name }} ({{ agent.phone }})
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

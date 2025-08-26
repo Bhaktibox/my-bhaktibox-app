@@ -1,0 +1,43 @@
+<div class="payment-container">
+  <h2>Payment</h2>
+
+  <div class="summary">
+    <p><strong>Total Amount:</strong> ₹{{ totalAmount }}</p>
+  </div>
+
+  <div class="payment-options">
+    <h3>Select Payment Method</h3>
+
+    <label>
+      <input
+        type="radio"
+        name="payment"
+        value="UPI"
+        [(ngModel)]="paymentMethod"
+      />
+      UPI (Google Pay / PhonePe / Paytm)
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="payment"
+        value="Card"
+        [(ngModel)]="paymentMethod"
+      />
+      Debit / Credit Card
+    </label>
+    <label>
+      <input
+        type="radio"
+        name="payment"
+        value="COD"
+        [(ngModel)]="paymentMethod"
+      />
+      Cash on Delivery
+    </label>
+  </div>
+
+  <button class="confirm-btn" (click)="confirmPayment()">
+    Confirm Payment
+  </button>
+</div>

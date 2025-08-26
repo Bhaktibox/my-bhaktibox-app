@@ -1,0 +1,141 @@
+<app-back-to-dashboard></app-back-to-dashboard>
+<div class="employees-page">
+  <h2>🧑‍🤝‍🧑 Employees Management</h2>
+  <p class="sub">View, edit, pay salary, or fire shopkeepers/agents</p>
+
+  <!-- Filters -->
+  <div class="filters card">
+    <input placeholder="Search name/email/phone" [(ngModel)]="q" />
+    <select [(ngModel)]="filterRole">
+      <option value="">All Roles</option>
+      <option value="shopkeeper">Shopkeeper</option>
+      <option value="agent">Delivery Agent</option>
+    </select>
+    <select [(ngModel)]="filterStatus">
+      <option value="">All Status</option>
+      <option value="active">Active</option>
+      <option value="on-leave">On Leave</option>
+      <option value="terminated">Terminated</option>
+    </select>
+    <input placeholder="City" [(ngModel)]="filterCity" />
+  </div>
+
+  <div class="table-wrap card">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Employee</th>
+          <th>Role</th>
+          <th>City</th>
+          <th>Pincodes</th>
+          <th>Salary (₹)</th>
+          <th>Last Paid</th>
+          <th>Status</th>
+          <th class="actions">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- Normal rows -->
+        <ng-container *ngFor="let emp of filteredEmployees">
+          <tr *ngIf="!editingEmployee || editingEmployee.id !== emp.id">
+            <td>{{ emp.id }}</td>
+            <td>
+              <div class="name">{{ emp.name }}</div>
+              <div class="muted">{{ emp.email }} • {{ emp.phone }}</div>
+            </td>
+            <td class="cap">{{ emp.role }}</td>
+            <td>{{ emp.city }}</td>
+            <td>
+              <span class="chip" *ngFor="let p of emp.pincodeCoverage">{{
+                p
+              }}</span>
+            </td>
+            <td>₹{{ emp.baseSalary | number : "1.0-0" }}</td>
+            <td>{{ emp.lastSalaryPaidOn || "-" }}</td>
+            <td>
+              <span
+                class="status"
+                [class.s-active]="emp.status === 'active'"
+                [class.s-leave]="emp.status === 'on-leave'"
+                [class.s-term]="emp.status === 'terminated'"
+              >
+                {{ emp.status }}
+              </span>
+            </td>
+            <td class="actions">
+              <button class="btn" (click)="startEdit(emp)">✏️ Edit</button>
+              <button class="btn warn" (click)="paySalary(emp)">
+                ₹ Pay Salary
+              </button>
+              <button class="btn danger" (click)="fireOrReinstate(emp)">
+                {{ emp.status === "terminated" ? "Reinstate" : "Fire" }}
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+
+        <!-- Editing row -->
+        <tr *ngIf="editingEmployee">
+          <td>{{ editingEmployee.id }}</td>
+          <td class="edit-col">
+            <input [(ngModel)]="editingEmployee.name" placeholder="Full name" />
+            <input [(ngModel)]="editingEmployee.email" placeholder="Email" />
+            <input [(ngModel)]="editingEmployee.phone" placeholder="Phone" />
+          </td>
+          <td>
+            <select [(ngModel)]="editingEmployee.role">
+              <option value="shopkeeper">Shopkeeper</option>
+              <option value="agent">Delivery Agent</option>
+            </select>
+          </td>
+          <td>
+            <input [(ngModel)]="editingEmployee.city" placeholder="City" />
+          </td>
+          <td class="pins">
+            <div class="chips">
+              <span
+                class="chip removable"
+                *ngFor="let p of editingEmployee.pincodeCoverage"
+                (click)="removePincodeDuringEdit(p)"
+              >
+                {{ p }} ✕
+              </span>
+            </div>
+            <div class="pin-add">
+              <input #pinInput placeholder="Add pincode" />
+              <button
+                class="btn small"
+                (click)="
+                  addPincodeDuringEdit(pinInput.value); pinInput.value = ''
+                "
+              >
+                Add
+              </button>
+            </div>
+          </td>
+          <td>
+            <input
+              type="number"
+              min="1"
+              [(ngModel)]="editingEmployee.baseSalary"
+            />
+          </td>
+          <td>{{ editingEmployee.lastSalaryPaidOn || "-" }}</td>
+          <td>
+            <select [(ngModel)]="editingEmployee.status">
+              <option value="active">Active</option>
+              <option value="on-leave">On Leave</option>
+              <option value="terminated">Terminated</option>
+            </select>
+          </td>
+          <td class="actions">
+            <button class="btn" (click)="saveEmployee()">💾 Save</button>
+            <button class="btn danger" (click)="cancelEdit()">✖ Cancel</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

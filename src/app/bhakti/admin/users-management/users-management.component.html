@@ -1,0 +1,52 @@
+<app-back-to-dashboard></app-back-to-dashboard>
+<div class="users-management">
+  <h2>👤 User Management</h2>
+
+  <table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>City</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Normal Rows -->
+      <ng-container *ngFor="let user of users">
+        <tr *ngIf="editingUser?.id !== user.id">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.city }}</td>
+          <td>{{ user.role }}</td>
+          <td>
+            <button (click)="editUser(user)">✏️ Edit</button>
+            <button (click)="deleteUser(user.id)">🗑️ Delete</button>
+          </td>
+        </tr>
+      </ng-container>
+
+      <!-- Editing Row -->
+      <tr *ngIf="editingUser">
+        <td>{{ editingUser.id }}</td>
+        <td><input [(ngModel)]="editingUser.name" /></td>
+        <td><input [(ngModel)]="editingUser.email" /></td>
+        <td><input [(ngModel)]="editingUser.city" /></td>
+        <td>
+          <select [(ngModel)]="editingUser.role">
+            <option value="user">User</option>
+            <option value="shopkeeper">Shopkeeper</option>
+            <option value="delivery">Delivery Agent</option>
+          </select>
+        </td>
+        <td>
+          <button (click)="saveUser()">💾 Save</button>
+          <button (click)="cancelEdit()">❌ Cancel</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

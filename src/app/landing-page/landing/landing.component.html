@@ -1,0 +1,83 @@
+<div class="main-container">
+  <!-- Hero Section -->
+  <section
+    class="hero-auction d-flex align-items-center justify-content-center"
+  >
+    <div class="hero-card container shadow-lg rounded-4 p-4 p-md-5">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <h1 class="headline">Bring Devotion to Your Doorstep</h1>
+          <p class="subheadline">
+            Discover premium Puja Aarti items delivered with care and devotion.
+          </p>
+          <button routerLink="/signup" class="btn btn-danger btn-lg mt-3">
+            Sign Up
+          </button>
+        </div>
+        <div class="col-md-6 text-center mt-4 mt-md-0">
+          <img
+            src="assets/images/puja-hero.jpg"
+            alt="Auction Illustration"
+            class="img-fluid rounded-3"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Items -->
+  <section class="featured-items">
+    <div class="container">
+      <h2 class="section-title text-center">Featured Aarti Products</h2>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let item of items">
+          <div class="product-card">
+            <img [src]="item.imageUrl" [alt]="item.title" />
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+            <p class="price">₹{{ item.basePrice }}</p>
+            <button routerLink="/signup" class="btn btn-outline-primary">
+              Buy Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="why-us">
+    <div class="container">
+      <h2 class="text-center">Why Choose Us?</h2>
+      <div class="row text-center">
+        <div class="col-md-4">
+          <i class="fas fa-truck fa-2x mb-3"></i>
+          <h4>Fast Delivery</h4>
+          <p>Timely delivery at your doorstep for all your puja needs.</p>
+        </div>
+        <div class="col-md-4">
+          <i class="fas fa-dharmachakra fa-2x mb-3"></i>
+          <h4>Authentic Products</h4>
+          <p>Carefully curated items that follow traditional values.</p>
+        </div>
+        <div class="col-md-4">
+          <i class="fas fa-hand-holding-heart fa-2x mb-3"></i>
+          <h4>Devotional Care</h4>
+          <p>Each item is packed with love and spiritual care.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter text-center">
+    <div class="container">
+      <h2>Stay Connected</h2>
+      <p>Receive updates on new arrivals and special offers.</p>
+      <form>
+        <input type="email" placeholder="Your Email" />
+        <button class="btn btn-primary" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,97 @@
+<header class="header p-3">
+  <div
+    class="container d-flex align-items-center justify-content-between flex-wrap"
+  >
+    <!-- Logo -->
+    <div class="icon-banner" routerLink="/">
+      <img src="assets/images/logo.jpg" alt="BhaktiBox Logo" class="logo-img" />
+      <h1 class="logo-text">BhaktiBox</h1>
+    </div>
+
+    <!-- If NOT logged in → Show Login/Signup -->
+    <div *ngIf="isLoggedIn" class="auth-buttons">
+      <button routerLink="/signin" class="btn btn-outline-success me-2">
+        Login
+      </button>
+      <button routerLink="/signup" class="btn btn-outline-warning">
+        Sign-up
+      </button>
+    </div>
+
+    <!-- If logged in → Dashboard -->
+    <div *ngIf="!isLoggedIn" class="dashboard d-flex align-items-center">
+      <!-- Hamburger for Mobile -->
+      <button class="menu-toggle d-md-none" (click)="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Nav Links -->
+      <nav class="nav-links" [class.show]="showMobileMenu">
+        <a
+          routerLink="/home"
+          routerLinkActive="active"
+          (click)="closeMobileMenu()"
+          >Home</a
+        >
+        <a
+          [routerLink]="['/home']"
+          fragment="about"
+          [class.active]="activeFragment === 'about'"
+          (click)="closeMobileMenu()"
+          >About</a
+        >
+        <a
+          [routerLink]="['/home']"
+          fragment="service"
+          [class.active]="activeFragment === 'service'"
+          (click)="closeMobileMenu()"
+          >Service</a
+        >
+        <a
+          [routerLink]="['/home']"
+          fragment="footer"
+          [class.active]="activeFragment === 'footer'"
+          (click)="closeMobileMenu()"
+          >Contact</a
+        >
+      </nav>
+
+      <!-- Notifications -->
+      <div class="notification-icon me-3" (click)="toggleNotifications()">
+        <i class="fas fa-bell"></i>
+        <span class="notification-count" *ngIf="getNotificationCount() > 0">
+          {{ getNotificationCount() }}
+        </span>
+        <div class="notification-dropdown" *ngIf="showNotifications">
+          <div
+            class="notification-item"
+            *ngFor="let notification of allNotifications"
+          >
+            {{ notification }}
+          </div>
+        </div>
+      </div>
+
+      <!-- 🛒 Cart -->
+      <div class="cart-icon me-3" routerLink="/cart">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" *ngIf="getCartCount() > 0">
+          {{ getCartCount() }}
+        </span>
+      </div>
+
+      <!-- User Menu -->
+      <div class="user-menu">
+        <button class="circular-button" (click)="toggleDropdown()">
+          {{ firstLetter }}
+        </button>
+        <div class="dropdown" *ngIf="showDropdown">
+          <a (click)="closeDropdown()" routerLink="/profile">My Profile</a>
+          <a (click)="closeDropdown()" routerLink="/my-orders">My Orders</a>
+          <a (click)="closeDropdown()" routerLink="/saved-carts">Saved Carts</a>
+          <app-logout></app-logout>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

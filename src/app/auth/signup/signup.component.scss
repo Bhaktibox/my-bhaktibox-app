@@ -1,0 +1,101 @@
+$primary-color: #4caf50;
+$disabled-color: #ccc;
+$error-color: red;
+$placeholder-color: #919aa3;
+
+.signup-container {
+  font-family: karla;
+  background-color: white;
+  max-width: 310px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 50px auto;
+  transition: opacity 0.3s ease, transform 1s ease;
+  h2 {
+    font-size: 25px;
+    margin-top: 10px;
+  }
+  .icon-banner {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .icon {
+      width: 50px;
+    }
+
+    h1 {
+      padding-left: 5px;
+      padding-top: 1rem;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    input,
+    select {
+      margin: 15px 0;
+      padding: 10px;
+      font-size: 1rem;
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: $primary-color;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+
+      &:disabled {
+        background-color: $disabled-color;
+        cursor: not-allowed;
+      }
+    }
+
+    .passwordCheck {
+      position: relative;
+
+      i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 15px;
+        cursor: pointer;
+      }
+    }
+
+    .invalid {
+      color: $error-color;
+      line-height: 15px;
+      margin-top: -15px;
+    }
+
+    .login-link {
+      margin-top: 10px;
+
+      span {
+        color: $placeholder-color;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.logo-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin-right: 10px;
+}
