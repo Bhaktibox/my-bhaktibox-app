@@ -27,6 +27,10 @@ export class ProfileComponent implements OnInit {
   };
 
   isEditing: boolean = false;
+  email: string = '';
+enteredOtp: string = '';
+otpSent: boolean = false;
+otpVerified: boolean = false;
 
   constructor() {}
 
@@ -83,4 +87,40 @@ export class ProfileComponent implements OnInit {
       alert("🚫 Your account has been deactivated.");
     }
   }
+
+  sendOtp() {
+  if (!this.email) {
+    alert('Enter a valid email!');
+    return;
+  }
+alert('OTP sent to your email!');
+  // Call backend API to send OTP
+  // this.http.post('/api/send-otp', { email: this.email }).subscribe({
+  //   next: () => {
+  //     this.otpSent = true;
+  //     alert('OTP sent to your email!');
+  //   },
+  //   error: () => alert('Failed to send OTP.')
+  // });
+}
+
+verifyOtp() {
+  if (!this.enteredOtp) {
+    alert('Enter the OTP!');
+    return;
+  }
+  alert('Email verified successfully!');
+  // Call backend API to verify OTP
+  // this.http.post('/api/verify-otp', { email: this.email, otp: this.enteredOtp }).subscribe({
+  //   next: (res: any) => {
+  //     if (res.verified) {
+  //       this.otpVerified = true;
+  //       alert('Email verified successfully!');
+  //     } else {
+  //       alert('Incorrect OTP. Try again.');
+  //     }
+  //   },
+  //   error: () => alert('Verification failed.')
+  // });
+}
 }

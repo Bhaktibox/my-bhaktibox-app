@@ -73,6 +73,12 @@ export class CartComponent {
   useNewAddress: boolean = false;
   editAddressId: number | null = null; // ✅ Added this property
 
+  deliveryDate: string = '';
+  deliveryCharge: number = 0;
+  gst: number = 0;
+  normalDeliveryCharge: number = 0;
+  distanceInKm:number = 1;
+
   constructor(private router: Router) {
     this.loadCart();
     this.loadAddresses();
@@ -94,17 +100,6 @@ export class CartComponent {
   removeItem(index: number) {
     this.cartItems.splice(index, 1);
     // this.saveCart();
-  }
-
-  getSubtotal(): number {
-    return this.cartItems.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
-  }
-
-  getTotal(): number {
-    return this.getSubtotal(); // future: add shipping, tax
   }
 
   clearCart() {
@@ -208,9 +203,6 @@ export class CartComponent {
     this.saveAddresses();
   }
 
-
-
-
   saveAddresses() {
     localStorage.setItem('addresses', JSON.stringify(this.addresses));
   }
@@ -276,5 +268,53 @@ export class CartComponent {
     alert('✅ Proceeding to payment...');
     // Example: this.router.navigate(['/payment']);
     this.router.navigate(['/payment']);
+  }
+
+  getSubtotal(): number {
+    return this.cartItems.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+  }
+
+  calculateNormalDelivery(distance: string | number) {
+  const km = Number(distance);
+  this.normalDeliveryCharge = isNaN(km) ? 0 : km * 10; // ₹10 per km
+  this.calculateCharges(); // 🔹 Recalculate GST + totals
+}
+
+  calculateCharges() {
+  if (!this.deliveryDate) return;
+
+  const today = new Date();
+  const selectedDate = new Date(this.deliveryDate);
+
+  const diffInTime = selectedDate.getTime() - today.getTime();
+  const diffInDays = Math.ceil(diffInTime / (1000 * 3600 * 24));
+
+  // Reset urgent charge
+  this.deliveryCharge = 0;
+
+  if (diffInDays < 0) {
+    alert("⚠️ Delivery date cannot be in the past.");
+    return;
+  }
+
+  // Urgent delivery charge logic
+  if (diffInDays < 3) {
+    this.deliveryCharge = (3 - diffInDays) * 50;
+  }
+
+  // ✅ GST on subtotal + normal + urgent
+  const subtotal = this.getSubtotal() + this.normalDeliveryCharge + this.deliveryCharge;
+  this.gst = Math.round(subtotal * 0.18);
+}
+
+
+  getTotal(): number {
+    let total = this.getSubtotal() + this.normalDeliveryCharge + this.gst;
+    total += this.deliveryCharge;
+
+    return total;
   }
 }

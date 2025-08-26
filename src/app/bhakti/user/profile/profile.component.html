@@ -42,10 +42,18 @@
       <input type="text" [(ngModel)]="profile.name" name="name" required />
     </label>
 
-    <label>
-      Email:
-      <input type="email" [(ngModel)]="profile.email" name="email" required />
-    </label>
+    <div class="email-verification">
+      <label>Email:</label>
+      <input type="email" [(ngModel)]="email" required />
+      <button (click)="sendOtp()" [disabled]="otpSent">Send OTP</button>
+
+      <div *ngIf="otpSent">
+        <label>Enter OTP:</label>
+        <input type="text" [(ngModel)]="enteredOtp" maxlength="6" />
+        <button (click)="verifyOtp()">Verify OTP</button>
+        <p *ngIf="otpVerified">✅ Email verified!</p>
+      </div>
+    </div>
 
     <label>
       Phone:
