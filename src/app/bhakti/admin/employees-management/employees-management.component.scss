@@ -1,6 +1,14 @@
-.employees-page { padding: 20px; }
-.employees-page h2 { color: #0b3a82; margin: 0; }
-.sub { color: #6b7280; margin: 6px 0 16px; }
+.employees-page {
+  padding: 20px;
+}
+.employees-page h2 {
+  color: #0b3a82;
+  margin: 0;
+}
+.sub {
+  color: #6b7280;
+  margin: 6px 0 16px;
+}
 
 .card {
   background: #fff;
@@ -10,47 +18,147 @@
   margin-bottom: 16px;
 }
 
-.filters { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 10px; }
-.filters input, .filters select {
-  padding: 8px 10px; border: 1px solid #e5e7eb; border-radius: 10px;
+/* 🔹 Filters responsive */
+.filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+.filters input,
+.filters select {
+  padding: 8px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
 }
 
-.table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; }
-thead th {
-  text-align: left; background: #f8fafc; color: #334155; font-weight: 600;
-  padding: 12px; border-bottom: 1px solid #e5e7eb;
+/* 🔹 Table responsive */
+.table-wrap {
+  overflow-x: auto;
 }
-td { padding: 10px 12px; border-bottom: 1px solid #eef2f7; vertical-align: top; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* prevents squishing too much */
+}
+thead th {
+  text-align: left;
+  background: #f8fafc;
+  color: #334155;
+  font-weight: 600;
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eef2f7;
+  vertical-align: top;
+}
 .cap { text-transform: capitalize; }
 
 .name { font-weight: 600; }
-.muted { color: #6b7280; font-size: 12px; margin-top: 2px; }
+.muted {
+  color: #6b7280;
+  font-size: 12px;
+  margin-top: 2px;
+}
 
 .chip {
-  display: inline-block; background: #eef2ff; color: #3730a3;
-  padding: 2px 8px; border-radius: 999px; margin: 2px 6px 2px 0; font-size: 12px;
+  display: inline-block;
+  background: #eef2ff;
+  color: #3730a3;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin: 2px 6px 2px 0;
+  font-size: 12px;
 }
-.chip.removable { cursor: pointer; background: #fee2e2; color: #991b1b; }
+.chip.removable {
+  cursor: pointer;
+  background: #fee2e2;
+  color: #991b1b;
+}
 
 .pins .chips { margin-bottom: 6px; }
-.pin-add { display: flex; gap: 8px; }
-.pin-add input { flex: 1; padding: 6px 8px; border: 1px solid #e5e7eb; border-radius: 8px; }
+.pin-add {
+  display: flex;
+  gap: 8px;
+}
+.pin-add input {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
 
 .actions { white-space: nowrap; }
 
 .btn {
-  padding: 6px 10px; border: none; border-radius: 8px; cursor: pointer;
-  background: #0ea5e9; color: #fff; margin-right: 6px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #0ea5e9;
+  color: #fff;
+  margin-right: 6px;
 }
 .btn.warn { background: #4caf50; }
 .btn.danger { background: #ef4444; }
 .btn.small { padding: 4px 8px; font-size: 12px; }
 
-.status { padding: 2px 8px; border-radius: 999px; font-size: 12px; text-transform: capitalize; }
+.status {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
 .s-active { background: #dcfce7; color: #166534; }
 .s-leave  { background: #fee2e2; color: #991b1b; }
 .s-term   { background: #e5e7eb; color: #374151; }
 
-.edit-col input { display: block; width: 100%; margin-bottom: 6px;
-  padding: 6px 8px; border: 1px solid #e5e7eb; border-radius: 8px; }
+.edit-col input {
+  display: block;
+  width: 100%;
+  margin-bottom: 6px;
+  padding: 6px 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+/* 🔹 Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .filters { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .filters { grid-template-columns: 1fr; }
+  .filters input, .filters select { width: 100%; }
+
+  .btn { margin-bottom: 6px; }
+}
+
+@media (max-width: 600px) {
+  table { min-width: unset; display: block; }
+  thead { display: none; }
+  tr {
+    display: block;
+    margin-bottom: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px;
+    background: #fff;
+  }
+  td {
+    display: flex;
+    justify-content: space-between;
+    text-align: right;
+    border: none;
+    padding: 8px 6px;
+  }
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    text-transform: capitalize;
+    color: #374151;
+    flex: 1;
+    text-align: left;
+  }
+}

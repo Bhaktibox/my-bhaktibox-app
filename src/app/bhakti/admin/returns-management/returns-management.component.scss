@@ -1,38 +1,56 @@
 .returns-management {
   padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 h2 {
   color: #2c3e50;
   margin-bottom: 10px;
+  font-size: 1.5rem;
 }
 
 p {
   color: #555;
   margin-bottom: 20px;
+  font-size: 1rem;
 }
 
+/* Table */
 table {
   width: 100%;
   border-collapse: collapse;
   background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 th {
   background: #f4f4f4;
   text-align: left;
+  font-weight: 600;
 }
 
 td, th {
-  padding: 10px;
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+  word-break: break-word;
 }
 
+/* Buttons */
 button {
   margin-right: 5px;
-  padding: 5px 10px;
+  padding: 6px 12px;
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  transition: opacity 0.2s;
+  font-size: 14px;
+}
+
+button:hover {
+  opacity: 0.85;
 }
 
 button:first-child {
@@ -45,6 +63,7 @@ button:last-child {
   color: white;
 }
 
+/* Status */
 span.pending {
   color: #f39c12;
   font-weight: bold;
@@ -58,4 +77,61 @@ span.approved {
 span.rejected {
   color: #e74c3c;
   font-weight: bold;
+}
+
+/* ============================= */
+/* 📱 Responsive Design */
+/* ============================= */
+@media (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+    width: 100%;
+  }
+
+  thead {
+    display: none; /* hide headers on small screens */
+  }
+
+  tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background: #fff;
+  }
+
+  td {
+    padding: 8px 10px;
+    border: none;
+    border-bottom: 1px solid #f4f4f4;
+    text-align: left;
+  }
+
+  td:last-child {
+    border-bottom: none;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 12px;
+    padding: 5px 8px;
+    margin-bottom: 5px;
+  }
 }
